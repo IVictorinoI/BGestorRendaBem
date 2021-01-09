@@ -1,4 +1,4 @@
-# iParty
+# BGestorRendaBem
 
 ## install:
 python -m venv env
