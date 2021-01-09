@@ -1,0 +1,38 @@
+CREATE DATABASE BGestorRendaBem;
+
+CREATE TABLE "AppUser" (
+	"Id" SERIAL PRIMARY KEY,
+	"Name" VARCHAR ( 100 ) NOT NULL,	
+	"Email" VARCHAR ( 255 ) NOT NULL,
+	"Password" VARCHAR ( 50 ) NOT NULL
+);
+
+CREATE TABLE "Customer" (
+	"Id" SERIAL PRIMARY KEY,
+    "Name" VARCHAR ( 100 ) NOT NULL,
+    "Cpf" VARCHAR ( 11 ) NOT NULL,
+    "BirthDate" DATE NOT NULL,
+    "Address" VARCHAR ( 255 ),
+    "Active" BOOL NOT NULL
+);
+
+CREATE TABLE "Assets" (
+	"Id" SERIAL PRIMARY KEY,
+	"CustomerId" INT NOT NULL,
+	"Title" VARCHAR ( 255 ) NOT NULL,
+	"Type" INT DEFAULT 0 NOT NULL,
+	"AcquisitionDate" TIMESTAMP NOT NULL,	
+	"EstimatedValue" DECIMAL(18,10) DEFAULT 0 NOT NULL,
+	"PayValue" DECIMAL(18,10) DEFAULT 0 NOT NULL,
+	"RemainingValue" DECIMAL(18,10) DEFAULT 0 NOT NULL,
+	"Status" INT DEFAULT 0 NOT NULL,
+	FOREIGN KEY ("CustomerId") REFERENCES "Customer" ("Id")
+);
+
+CREATE TABLE "Income" (
+	"Id" SERIAL PRIMARY KEY,
+    "CustomerId" INT NOT NULL,
+    "Fixed" BOOLEAN DEFAULT FALSE NOT NULL,
+    "Value" DECIMAL(18,10) DEFAULT 0 NOT NULL,
+	FOREIGN KEY ("CustomerId") REFERENCES "Customer" ("Id")
+)

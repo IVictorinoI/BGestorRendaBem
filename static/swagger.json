@@ -1,0 +1,588 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "A aplication for people",
+      "version": "v1",
+      "title": "B - Gestor Bens API",
+      "license": {
+        "name": "Use under LICX",
+        "url": "https://github.com/IVictorinoI/"
+      },
+      "contact": {
+        "name": "Victor Matheus Mendes",
+        "email": "victormatheusmendes@hotmail.com",
+        "url": "https://github.com/IVictorinoI/"
+      }
+    },
+    "servers": [
+      {
+        "url": "/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Customer Request",
+        "description": "Customer API"
+      },
+      {
+        "name": "Asset Request",
+        "description": "Asset API"
+      },
+      {
+        "name": "Income Request",
+        "description": "Income API"
+      }
+    ],
+    "paths": {
+      "/customer": {
+        "get": {
+          "tags": [
+            "Customer Request"
+          ],
+          "summary": "Returns customers",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/customer"
+              }
+            }
+          }
+        }
+      },
+      "/customer/{cpf}": {
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "CPF of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Customer Request"
+          ],
+          "summary": "Get customer request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "cpf",
+              "required": true,
+              "description": "Book Request id",
+              "schema": {
+                "$ref": "#/components/schemas/cpf"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/customer"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Book request not found."
+            }
+          }
+        },
+        "put": {
+          "summary": "Create/update a customer",
+          "tags": [
+            "Customer Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "cpf",
+              "required": true,
+              "description": "CPF of People",
+              "schema": {
+                "$ref": "#/components/schemas/cpf"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Syncronize with people service",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/customer"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/customer"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/asset": {
+        "get": {
+          "tags": [
+            "Asset Request"
+          ],
+          "summary": "Returns assets",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/asset"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Asset Request"
+          ],
+          "summary": "Create a new asset request system",
+          "requestBody": {
+            "description": "Asset Request Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/asset"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/asset/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Asset Request"
+          ],
+          "summary": "Get asset request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Asset Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/asset"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Asset request not found."
+            }
+          }
+        },
+        "put": {
+          "summary": "edit a asset request by ID",
+          "tags": [
+            "Asset Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Asset Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Asset Request Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/asset"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/asset"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Asset Request by ID",
+          "tags": [
+            "Asset Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Asset Request Id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Asset Request not found."
+            }
+          }
+        }
+      },
+      "/income": {
+        "get": {
+          "tags": [
+            "Income Request"
+          ],
+          "summary": "Returns incomes",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/income"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Income Request"
+          ],
+          "summary": "Create a new income request system",
+          "requestBody": {
+            "description": "Income Request Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/income"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/income/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Income Request"
+          ],
+          "summary": "Get income request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Income Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/income"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Income request not found."
+            }
+          }
+        },
+        "put": {
+          "summary": "edit a income request by ID",
+          "tags": [
+            "Income Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Income Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Income Request Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/income"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/income"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Income Request by ID",
+          "tags": [
+            "Income Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Income Request Id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Income Request not found."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "id": {
+          "properties": {
+            "uuid": {
+              "type": "int"
+            }
+          }
+        },
+        "cpf": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "asset": {
+          "type": "object",
+          "properties": {
+            "customerId": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "title": {
+              "type": "string",
+              "format": "string"
+            },
+            "type": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "acquisitionDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "estimatedValue": {
+              "type": "number",
+              "format": "double"
+            },
+            "payValue": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "income": {
+          "type": "object",
+          "properties": {
+            "customerId": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "fixed": {
+              "type": "boolean",
+              "format": ""
+            },
+            "value": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "customer": {
+          "type": "object",
+          "properties": {
+            "customerId": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "name": {
+              "type": "string",
+              "format": "string"
+            },
+            "cpf": {
+              "type": "string",
+              "format": "string"
+            },
+            "birthDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "address": {
+              "type": "string",
+              "format": "string"
+            },
+            "active": {
+              "type": "boolean",
+              "format": ""
+            }
+          }
+        },
+        "customers": {
+          "type": "object",
+          "properties": {
+            "customer": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/customer"
+              }
+            }
+          }
+        },
+        "assets": {
+          "type": "object",
+          "properties": {
+            "asset": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/asset"
+              }
+            }
+          }
+        },
+        "incomes": {
+          "type": "object",
+          "properties": {
+            "income": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/income"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
