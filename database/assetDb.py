@@ -64,6 +64,19 @@ class AssetDb(object):
 
         return results
 
+    def getByCpf(self, cpf):
+        con = DatabaseConnection().get()
+        cur = con.cursor()
+
+        cur.execute('select "Id", "CustomerId", "Title", "Type", "AcquisitionDate", "EstimatedValue", "PayValue", "RemainingValue", "Status" from "Assets" where exists(select 1 from "Customer" c where c."Id" = "Assets"."CustomerId" and c."Cpf"=\'{0}\')'.format(cpf))
+        recset = cur.fetchall()
+
+        results = self.mapToDto(recset)
+
+        con.close()
+
+        return results        
+
     def mapToDto(self, data):
         columns = ("id", "customerId", "title", "type", "acquisitionDate", "estimatedValue", "payValue", "remainingValue", "status")
 

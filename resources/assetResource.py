@@ -12,10 +12,12 @@ class AssetResouce(Resource):
     def get(self, id=None):
         #AuthToken.autenticar()
 
-        if id is None:
-            return jsonify(json.loads(json.dumps(AssetService().getAll(), indent=2, default=str))).json, 200
-        else:
+        if request.args.get('cpf') is not None:
+            return jsonify(json.loads(json.dumps(AssetService().getByCpf(request.args.get('cpf')), indent=2, default=str))).json, 200
+        elif id is not None:
             return jsonify(json.loads(json.dumps(AssetService().getById(id), indent=2, default=str))).json, 200
+        else:
+            return jsonify(json.loads(json.dumps(AssetService().getAll(), indent=2, default=str))).json, 200
         
 
     def post(self):

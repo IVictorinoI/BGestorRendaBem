@@ -63,6 +63,19 @@ class IncomeDb(object):
 
         return results        
 
+    def getByCpf(self, cpf):
+        con = DatabaseConnection().get()
+        cur = con.cursor()
+
+        cur.execute('select "Id", "CustomerId", "Fixed", "Value" from "Income" where exists(select 1 from "Customer" c where c."Id" = "Income"."CustomerId" and c."Cpf"=\'{0}\')'.format(cpf))
+        recset = cur.fetchall()
+
+        results = self.mapToDto(recset)
+
+        con.close()
+
+        return results          
+
     def mapToDto(self, data):
         columns = ("id", "customerId", "fixed", "value")
 

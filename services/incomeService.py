@@ -19,3 +19,6 @@ class IncomeService(object):
 
     def getById(self, id):
         return IncomeDb().getById(id)        
+
+    def getByCpf(self, cpf):
+        return IncomeDb().getByCpf(cpf)

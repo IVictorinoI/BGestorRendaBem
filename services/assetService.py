@@ -19,5 +19,8 @@ class AssetService(object):
     def getAll(self):
         return AssetDb().getAll()
         
+    def getByCpf(self, cpf):
+        return AssetDb().getByCpf(cpf)
+
     def getById(self, id):
         return AssetDb().getById(id)

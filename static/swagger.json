@@ -181,6 +181,48 @@
           }
         }
       },
+      "/asset?cpf={cpf}": {
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "ID of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Asset Request"
+          ],
+          "summary": "Get asset request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "cpf",
+              "required": true,
+              "description": "Asset Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/asset"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Asset request not found."
+            }
+          }
+        }
+      },
       "/asset/{id}": {
         "parameters": [
           {
@@ -339,6 +381,48 @@
             },
             "400": {
               "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/income?cpf={cpf}": {
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "ID of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Income Request"
+          ],
+          "summary": "Get income request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "cpf",
+              "required": true,
+              "description": "Income Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/income"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Income request not found."
             }
           }
         }
